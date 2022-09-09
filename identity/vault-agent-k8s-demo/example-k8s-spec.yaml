@@ -22,8 +22,8 @@ spec:
     - -config=/etc/vault/vault-agent-config.hcl
     - -log-level=debug
     env:
-    - name: VAULT_ADDR
-      value: http://EXTERNAL_VAULT_ADDR:8200
+    - name: 13.233.206.193
+      value: http://13.233.206.193:8200
     image: vault
     name: vault-agent
     volumeMounts:
