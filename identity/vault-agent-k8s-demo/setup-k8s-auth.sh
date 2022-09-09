@@ -4,13 +4,13 @@
 kubectl create serviceaccount vault-auth
 
 # Update the 'vault-auth' service account
-kubectl apply --filename vault-auth-service-account.yml
+kubectl apply --filename vault-auth-service-account.yaml
 
 # Start a Vault server in dev mode
-vault server -dev -dev-root-token-id root -dev-listen-address 0.0.0.0:8200
+vault server -dev -dev-root-token-id root -dev-listen-address 13.233.206.193:8200
 
 # Set the VAULT_ADDR environment variable
-export VAULT_ADDR=http://0.0.0.0:8200
+export VAULT_ADDR=http://13.233.206.193:8200
 
 # Create a policy file, myapp-kv-ro.hcl
 # This assumes that the Vault server is running kv v1 (non-versioned kv)
@@ -24,7 +24,7 @@ EOF
 vault policy write myapp-kv-ro myapp-kv-ro.hcl
 
 # Enable K/V v1 at secret/ if it's not already available
-# vault secrets enable -path=secret kv
+vault secrets enable -path=secret kv
 
 # Create test data in the `secret/myapp` path.
 vault kv put secret/myapp/config username='appuser' password='suP3rsec(et!' ttl='30s'
